@@ -1,24 +1,39 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
+import './App.css'
+import SignIn from './Signin'
 import Main from './Main'
-import './App.css';
 
 class App extends Component {
   state = {
-    user: {
-      uid: '117',
-      userName: 'Master Chief',
-      email: 'masterchief@gmail.com'
-    }
+    user: {},
+  }
+
+  handleAuth = (user) => {
+    this.setState({ user })
+  }
+
+  signedIn = () => {
+    return this.state.user.uid
+  }
+
+  signOut = () => {
+    this.setState({
+      user: {},
+    })
   }
 
   render() {
     return (
       <div className="App">
-        <Main user={this.state.user}/>
+        {
+          this.signedIn()
+            ? <Main user={this.state.user} signOut={this.signOut} />
+            : <SignIn handleAuth={this.handleAuth} />
+        }
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
