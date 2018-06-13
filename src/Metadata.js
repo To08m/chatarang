@@ -1,26 +1,29 @@
 import React from 'react'
 
-const Metadata =() =>{
-    return(
-
-    )
+const Metadata = ({ message }) => {
+  return (
+    <div className="Metadata" style={styles.data}>
+      <div style={styles.user}>{message.user.userName}</div>
+      <div style={styles.time}>1:10 PM</div>
+    </div>
+  )
 }
 
 const styles = {
-    .Metadata {
-        display: flex;
-        align-items: baseline;
-      }
-      
-      .Metadata .user {
-        font-weight: bold;
-        margin-right: 0.5rem;
-      }
-      
-      .Metadata .time {
-        color: #999;
-        font-size: 0.8rem;
-      }
+  data: {
+    display: 'flex',
+    alignItems: 'baseline',
+  },
+
+  user: {
+    fontWeight: 'bold',
+    marginRight: '0.5rem',
+  },
+
+  time: {
+    color: '#999',
+    fontSize: '0.8rem',
+  }
 }
 
 export default Metadata
