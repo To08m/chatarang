@@ -7,7 +7,11 @@ class RoomList extends Component {
     super()
 
     this.state = {
+<<<<<<< HEAD
       room: '',
+=======
+      room : '',
+>>>>>>> 6a031f631368158302f2a17e357ef52f5af60696
     }
   }
   render(){
@@ -28,9 +32,14 @@ class RoomList extends Component {
   )
 }
 
+<<<<<<< HEAD
  changeRoom = () =>{ //i previously tried putting this in main.js. 
   //My problem was trying to reach down one side of the "tree", getting data, and using that data to manipulate something on the other side
   base.syncState('general/messages', {
+=======
+ changeRoom = () =>{
+  base.syncState('{this.className}/messages', {
+>>>>>>> 6a031f631368158302f2a17e357ef52f5af60696
     context: this,
     state: 'messages',
     asArray: true,
