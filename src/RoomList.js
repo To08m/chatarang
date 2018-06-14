@@ -7,7 +7,7 @@ class RoomList extends Component {
     super()
 
     this.state = {
-      messages: [],
+      room : '',
     }
   }
   render(){
@@ -29,7 +29,7 @@ class RoomList extends Component {
 }
 
  changeRoom = () =>{
-  base.syncState('general/messages', {
+  base.syncState('{this.className}/messages', {
     context: this,
     state: 'messages',
     asArray: true,
