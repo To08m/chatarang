@@ -30,7 +30,7 @@ class RoomList extends Component {
 
  changeRoom = () =>{ //i previously tried putting this in main.js. 
   //My problem was trying to reach down one side of the "tree", getting data, and using that data to manipulate something on the other side
-  base.syncState({this.className}'/messages', {
+  base.syncState('general/messages', {
     context: this,
     state: 'messages',
     asArray: true,
