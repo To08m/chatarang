@@ -1,7 +1,16 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { StyleSheet, css } from 'aphrodite'
+import base from './base'
 
-const RoomList = () => {
+class RoomList extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      messages: [],
+    }
+  }
+  render(){
   return (
     <nav
       className={`RoomList ${css(styles.nav)}`}
@@ -9,14 +18,23 @@ const RoomList = () => {
       <h2 className={css(styles.h2)}>Rooms</h2>
       <ul className={css(styles.list)}>
         <li className={css(styles.item)}>
-          <a href="#" className={css(styles.link)}>general</a>
+          <a href="#" className={css(styles.link)} onClick={changeRoom()}>general</a>
         </li>
         <li className={css(styles.item)}>
-          <a href="#" className={css(styles.link)}>random</a>
+          <a href="#" className={css(styles.link)} onClick={changeRoom()}>random</a>
         </li>
       </ul>
     </nav>
   )
+}
+
+ changeRoom = () =>{
+  base.syncState('general/messages', {
+    context: this,
+    state: 'messages',
+    asArray: true,
+  })
+}
 }
 
 const styles = StyleSheet.create({
