@@ -1,19 +1,29 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import { StyleSheet, css } from 'aphrodite'
-import base from './base'
+
+import RoomLink from './RoomLink'
 
 class RoomList extends Component {
-  constructor() {
-    super()
-
-    this.state = {
-<<<<<<< HEAD
-      room: '',
-=======
-      room : '',
->>>>>>> 6a031f631368158302f2a17e357ef52f5af60696
+  state={
+    rooms:{
+      general:{
+        name:'general',
+        description:'boop',
+        messages:[],
+      },
+      s2morning:{
+        name:'s2morning',
+        description:'la',
+        messages:[],
+      },
+      random:{
+        name:'random',
+        description:'memes',
+        messages:[],
+      },
     }
   }
+
   render(){
   return (
     <nav
@@ -21,29 +31,14 @@ class RoomList extends Component {
     >
       <h2 className={css(styles.h2)}>Rooms</h2>
       <ul className={css(styles.list)}>
-        <li className={css(styles.item)}>
-          <a href="#" className={css(styles.link)} onClick={changeRoom()}>general</a>
-        </li>
-        <li className={css(styles.item)}>
-          <a href="#" className={css(styles.link)} onClick={changeRoom()}>random</a>
-        </li>
+        {
+          Object.keys(this.state.rooms).map(roomName => (
+            <RoomLink key={roomName} room={this.state.rooms[roomName]} />
+          ))
+        }
       </ul>
     </nav>
   )
-}
-
-<<<<<<< HEAD
- changeRoom = () =>{ //i previously tried putting this in main.js. 
-  //My problem was trying to reach down one side of the "tree", getting data, and using that data to manipulate something on the other side
-  base.syncState('general/messages', {
-=======
- changeRoom = () =>{
-  base.syncState('{this.className}/messages', {
->>>>>>> 6a031f631368158302f2a17e357ef52f5af60696
-    context: this,
-    state: 'messages',
-    asArray: true,
-  })
 }
 }
 
@@ -62,23 +57,7 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
   },
 
-  item: {
-    marginBottom: '0.5rem',
-  },
-
-  link: {
-    display: 'block',
-    color: 'whitesmoke',
-    textDecoration: 'none',
-
-    '::before': {
-      content: '"# "',
-    },
-
-    ':hover': {
-      backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    }
-  },
+  
 })
 
 export default RoomList
