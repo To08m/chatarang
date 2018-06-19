@@ -76,11 +76,12 @@ class App extends Component {
               : <Redirect to="/sign-in" />
             )}
           />
+         
           <Route
-            render={() => (
+            render={()=>(
               this.signedIn()
-                ? <Redirect to="/rooms/general" />
-                : <Redirect to="/sign-in" />
+              ? <Redirect to ="/rooms/general" />
+              : <Redirect to="/sign-in"/>
             )}
           />
         </Switch>
