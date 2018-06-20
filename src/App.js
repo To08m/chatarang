@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 
 import './App.css'
 import base, { auth } from './base'
-import SignIn from './SignIn'
+import SignIn from './Signin'
 import Main from './Main'
 
 class App extends Component {

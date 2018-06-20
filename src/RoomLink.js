@@ -2,9 +2,7 @@ import React from 'react'
 import { StyleSheet, css } from 'aphrodite'
 import { NavLink } from 'react-router-dom'
 
-const RoomLink = ({room ,user,users, rooms}) => {
-  if( rooms.length !== 0){
-    if(users.includes(user.uid)){
+const RoomLink = ({ room }) => {
   return (
     <li className={css(styles.item)}>
       <NavLink
@@ -15,22 +13,6 @@ const RoomLink = ({room ,user,users, rooms}) => {
       </NavLink>
     </li>
   )
-  }
-  else{
-    return(
-    <li className={css(styles.item)}>
-      private
-    </li>
-    )
-  }
-  }
-  else{
-    return(
-    <li className={css(styles.item)}>
-      
-    </li>
-    )
-  }
 }
 
 const styles = StyleSheet.create({

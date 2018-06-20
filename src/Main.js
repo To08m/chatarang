@@ -34,10 +34,32 @@ class Main extends Component {
     }
   }
 
+  filteredRooms = () => {
+    return this.filteredRoomNames()
+               .map(roomName => this.state.rooms[roomName])
+  }
+
+  filteredRoomNames = () => {
+    return Object.keys(this.state.rooms)
+            .filter(roomName => {
+              const room = this.state.rooms[roomName]
+              if (!room) return false
+              return room.public || this.includesCurrentUser(room)
+            })
+  }
+
+  includesCurrentUser = (room) => {
+    const members = room.members || []
+    return members.find(
+      userOption => userOption.value === this.props.user.uid
+    )
+  }
+
   loadRoom = (roomName) => {
     if (roomName === 'new') return null
 
-    const room = this.state.rooms[roomName]
+    const room = this.filteredRooms()
+                     .find(room => room.name === roomName)
 
     if (room) {
       this.setState({ room })
@@ -63,7 +85,7 @@ class Main extends Component {
   }
 
   loadValidRoom = () => {
-    const realRoomName = Object.keys(this.state.rooms).find(
+    const realRoomName = this.filteredRoomNames().find(
       roomName => this.state.rooms[roomName]
     )
 
@@ -77,7 +99,7 @@ class Main extends Component {
           user={this.props.user}
           signOut={this.props.signOut}
           users={this.props.users}
-          rooms={this.state.rooms}
+          rooms={this.filteredRooms()}
           addRoom={this.addRoom}
         />
         <Chat
