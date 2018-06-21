@@ -5,10 +5,12 @@ import { Picker } from 'emoji-mart'
 
 import Avatar from './Avatar'
 import Metadata from './Metadata'
+import Reacti from './Reacti'
 
 class Message extends Component {
   state = {
     showPicker: false,
+    mojis: [],
   }
 
   togglePicker = () => {
@@ -16,7 +18,7 @@ class Message extends Component {
   }
 
   handleEmojiSelect = (emoji) => {
-    console.log(emoji)
+    this.state.mojis.push(emoji)
     this.togglePicker()
   }
 
@@ -37,6 +39,11 @@ class Message extends Component {
           >
             <i className="far fa-smile"></i>
           </button>
+        </div>
+        <div>
+          {
+            this.state.mojis.map(moji => <Reacti react={moji}/>)
+          }
         </div>
         {
           this.state.showPicker &&
