@@ -5,12 +5,11 @@ import { Picker } from 'emoji-mart'
 
 import Avatar from './Avatar'
 import Metadata from './Metadata'
-import Reacti from './Reacti'
+import Reaction from './Reaction'
 
 class Message extends Component {
   state = {
     showPicker: false,
-    mojis: [],
   }
 
   togglePicker = () => {
@@ -18,12 +17,13 @@ class Message extends Component {
   }
 
   handleEmojiSelect = (emoji) => {
-    this.state.mojis.push(emoji)
+    this.props.addReaction({...this.props.message}, emoji.colons)
     this.togglePicker()
   }
 
   render() {
     const { message } = this.props
+    const reactions = message.reactions || {}
 
     return (
       <div className={`Message ${css(styles.message)}`}>
@@ -33,17 +33,26 @@ class Message extends Component {
           <div className="body">
             {message.body}
           </div>
+          <div className={css(styles.reactionList)}>
+            {
+              Object.keys(reactions).map(
+                emoji => (
+                  <Reaction
+                    key={emoji}
+                    message={message}
+                    emoji={emoji}
+                    addReaction={this.props.addReaction}
+                  />
+                )
+              )
+            }
+          </div>
           <button
             className={`reactionButton ${css(styles.reactionButton)}`}
             onClick={this.togglePicker}
           >
             <i className="far fa-smile"></i>
           </button>
-        </div>
-        <div>
-          {
-            this.state.mojis.map(moji => <Reacti react={moji}/>)
-          }
         </div>
         {
           this.state.showPicker &&
@@ -91,6 +100,11 @@ const styles = StyleSheet.create({
     ':hover': {
       color: '#3366ff',
     },
+  },
+
+  reactionList: {
+    display: 'flex',
+    marginTop: '0.5rem',
   },
 })
 
